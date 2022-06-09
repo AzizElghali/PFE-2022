@@ -1,0 +1,27 @@
+syntax="proto3";
+package MQTT;
+
+
+service MQTTService {
+  rpc publish(PublishRequest) returns (NoParam);
+};
+
+
+message NoParam {};
+message NoResponse {};
+
+message SubscribeResponse {
+  string topic=1;
+  string message=2;
+};
+
+message SubscribeRequest {
+  string topic=1;
+}
+
+
+message PublishRequest {
+  string topic=1;
+  string message=2;
+};
+

@@ -1,0 +1,12 @@
+[Unit]
+Description=Configuration Manager GRPC Service
+
+
+[Service]
+Type=simple
+Restart=always
+ExecStart=/usr/bin/python3 /home/aziz/Code/PFE/ModbusTCP/Server/server.py
+
+
+[Install]
+WantedBy=multi-user.target

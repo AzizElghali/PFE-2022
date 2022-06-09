@@ -1,0 +1,25 @@
+syntax="proto3";
+package ConfigManager;
+
+
+
+service ConfigManager {
+  rpc getMQTTConfig(NoParam) returns (MQTTConfigResponse);
+  rpc getModbusTCPConfig(NoParam) returns (ModbusTCPConfigResponse);
+}
+
+message NoParam {};
+
+message ModbusTCPConfigResponse {
+  string serverIp=1;
+  uint32 serverPort=2;
+	string mqttIp=3;
+	uint32 mqttPort=4;
+};
+
+message MQTTConfigResponse {
+  string mqttIp=1;
+  uint32 mqttPort=2;
+  string brokerIp=3;
+  uint32 brokerPort=4;
+};
