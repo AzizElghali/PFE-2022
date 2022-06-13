@@ -1,0 +1,49 @@
+#!/bin/bash
+
+rootDir=/home/aziz/Desktop/PFE
+PS3="Select module: "
+
+declare -A modules
+modules[configServer]=$rootDir/configManager/configManager.py
+modules[mqtt]=$rootDir/MQTT/MQTT.py
+modules[modbusServer]=$rootDir/ModbusTCP/Server/server.py
+modules[modbusClient]=$rootDir/ModbusTCP/Client/client.py
+[[ $# == 0 ]] && echo "No Module Name" >&2 && exit 1;
+
+
+spawnTerminal() {
+  cmd=$1
+  gnome-terminal -- bash -c "$cmd; exec bash"
+}
+
+startModule() {
+  module=$1
+  path=${modules[$module]}
+  baseFile=$(basename $path)
+  baseDir=$(dirname $path)
+  cmd="cd $baseDir && python3 $baseFile"
+  spawnTerminal "$cmd"
+}
+
+
+mosquittoSub() {
+  read -p "Mqtt topic: " topic
+  echo "Your topic is: $topic"
+  cmd="mosquitto_sub -t $topic"
+  spawnTerminal "$cmd"
+}
+
+while getopts "am" options; do
+  case $options in
+  
+  m)
+    mosquitto -d
+    options=("configServer" "mqtt" "modbusServer" "Mosquitto sub" "modbusClient" "Quit" )
+    select opt in "${options[@]}"
+    do
+       echo "Module $opt starting"
+      [[ $opt != "Mosquitto sub" ]] && startModule $opt || mosquittoSub
+    done
+    ;;
+    esac
+done
