@@ -38,7 +38,7 @@ while getopts "am" options; do
   
   m)
     mosquitto -d
-    options=("configServer" "mqtt" "modbusServer" "Mosquitto sub" "modbusClient" "Quit" )
+    options=("configServer" "mqtt" "modbusServer" "Mosquitto sub" "modbusClient" )
     select opt in "${options[@]}"
     do
        echo "Module $opt starting"
