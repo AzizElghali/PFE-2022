@@ -5,8 +5,8 @@ Description=Configuration Manager GRPC Service
 [Service]
 Type=simple
 Restart=always
-ExecStart=/usr/bin/python3 /home/aziz/PFE/configManager/configManager.py
-
+ExecStart=/usr/bin/python3 /opt/configManager/configManager.py
+WorkingDirectory=/opt/configManager
 
 [Install]
 WantedBy=multi-user.target

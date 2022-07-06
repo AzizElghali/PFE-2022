@@ -1,12 +1,12 @@
 [Unit]
 Description=Configuration Manager GRPC Service
-
+After=config-managerd.service
 
 [Service]
 Type=simple
 Restart=always
-ExecStart=/usr/bin/python3 /home/nadoum/Code/PFE/MQTT/MQTT.py
-
+ExecStart=/usr/bin/python3 /opt/MQTT/MQTT.py
+WorkingDirectory=/opt/MQTT
 
 [Install]
 WantedBy=multi-user.target

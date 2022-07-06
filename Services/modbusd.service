@@ -1,12 +1,12 @@
 [Unit]
 Description=Configuration Manager GRPC Service
-
+After=mqttd.service
 
 [Service]
 Type=simple
 Restart=always
-ExecStart=/usr/bin/python3 /home/aziz/Code/PFE/ModbusTCP/Server/server.py
-
+ExecStart=/usr/bin/python3 /opt/ModbusTCP/Client/client.py
+WorkingDirectory=/opt/ModbusTCP/Client
 
 [Install]
 WantedBy=multi-user.target

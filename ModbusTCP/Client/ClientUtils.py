@@ -24,6 +24,7 @@ class ModbusTCPClient():
   def __init__(self, settings):
     self.MODBUS_SERVER_IP=settings.modbusTCPServerConfig.ip;
     self.MODBUS_SERVER_PORT=settings.modbusTCPServerConfig.port;
+    print(f"[Modbus TCP Client] IP: {self.MODBUS_SERVER_IP}, PORT: {self.MODBUS_SERVER_PORT}")
     self.modbusClient = ModbusClient(self.MODBUS_SERVER_IP, port=self.MODBUS_SERVER_PORT);
     self.unit=0x1;
     self.modbusClient.connect();
@@ -38,7 +39,7 @@ class MQTTClient():
     self.MQTT_SERVER_IP=settings.mqttServerConfig.ip;
     self.MQTT_SERVER_PORT=settings.mqttServerConfig.port;
     self.SOCKET=f"{self.MQTT_SERVER_IP}:{self.MQTT_SERVER_PORT}";
-
+    print(f"MQTT IP:PORT {self.SOCKET}")
     self.channel = grpc.insecure_channel(self.SOCKET);
     self.stub=mqttGrpc.MQTTServiceStub(self.channel);
 
